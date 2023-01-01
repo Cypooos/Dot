@@ -1,0 +1,2 @@
+# Hypercube
+ hypercube discord bot
