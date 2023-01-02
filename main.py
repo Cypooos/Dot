@@ -2,6 +2,7 @@ import discord
 from discord import app_commands
 
 intents = discord.Intents.default()
+intents.message_content = True
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
 
@@ -24,10 +25,14 @@ async def say(interaction,text:str):
 
 @tree.command(name = "zuify", description = "Translate a text to zu!", guilds=GUILDS_PRIORITARY) 
 async def zuify(interaction, text:str):
-    t = [c.upper() for c in text.strip()]
+    t = [c.upper() for c in text.replace("\\n","\n").strip()]
     out = map(lambda x:str(ZU_EMOGIES[interaction.guild_id].get(x,":question:")),t)
     await interaction.response.send_message("".join(out))
 
+@client.event
+async def on_message(message):
+    print(message.guild.name+"#"+message.channel.name,message.author,":",message.content)
+    #await client.process_commands(message)
 
 @client.event
 async def on_ready():
@@ -36,6 +41,8 @@ async def on_ready():
     for guild in client.guilds:
         print("Adding zu alphabet for",guild.name)
         ZU_EMOGIES[guild.id] = {}
+        for x in "\n\t,'\"#~*_-:?;.$^1234567890+=|`}{()[]&µ!²\\":
+            ZU_EMOGIES[guild.id][x] = x
         for c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
             name_ = "zu"+c
             if c == "Q" or c == "K": name_ = "zuKQ"
