@@ -17,7 +17,7 @@ ZU_EMOGIES = { }
 
 @tree.command(name = "ping", description = "It says pong !", guilds=GUILDS_PRIORITARY) 
 async def ping(interaction):
-    await interaction.response.send_message("pong!")
+    await interaction.response.send_message("pong!", ephemeral=True)
     
 @tree.command(name = "say", description = "Make Dot say something", guilds=GUILDS_PRIORITARY) 
 async def say(interaction,text:str):
@@ -25,9 +25,12 @@ async def say(interaction,text:str):
 
 @tree.command(name = "zuify", description = "Translate a text to zu!", guilds=GUILDS_PRIORITARY) 
 async def zuify(interaction, text:str):
-    t = [c.upper() for c in text.replace("\\n","\n").strip()]
-    out = map(lambda x:str(ZU_EMOGIES[interaction.guild_id].get(x,":question:")),t)
-    await interaction.response.send_message("".join(out))
+    if len(text) > 100:
+        await interaction.response.send_message("Your text was too long for me, sorry :(\n(limit is 100 characters)", ephemeral=True)
+    else:
+        t = [c.upper() for c in text.replace("\\n","\n").strip()]
+        out = map(lambda x:str(ZU_EMOGIES[interaction.guild_id].get(x,":question:")),t)
+        await interaction.response.send_message("".join(out))
 
 @client.event
 async def on_message(message):
