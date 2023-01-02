@@ -5,9 +5,9 @@ intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
 
-with open("key.env","r") as f:
+with open("./key.env","r") as f:
     TOKEN = f.read()
-with open("guild.env","r") as f:
+with open("./guild.env","r") as f:
     GUILD_ID = int(f.read())
 
 GUILD = discord.Object(id=GUILD_ID)
