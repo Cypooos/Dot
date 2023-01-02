@@ -21,7 +21,10 @@ async def ping(interaction):
     
 @tree.command(name = "say", description = "Make Dot say something", guilds=GUILDS_PRIORITARY) 
 async def say(interaction,text:str):
-    await interaction.response.send_message(text)
+    if len(text) > 100:
+        await interaction.response.send_message("Your text was too long for me, sorry :(\n(limit is 100 characters)", ephemeral=True)
+    else:
+        await interaction.response.send_message(text)
 
 @tree.command(name = "zuify", description = "Translate a text to zu!", guilds=GUILDS_PRIORITARY) 
 async def zuify(interaction, text:str):
