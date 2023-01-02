@@ -40,7 +40,9 @@ async def on_ready():
             name_ = "zu"+c
             if c == "Q" or c == "K": name_ = "zuKQ"
             if c == "U" or c == "V": name_ = "zuUV"
-            ZU_EMOGIES[guild.id][c] = discord.utils.get(guild.emojis, name=name_)
+            ZU_EMOGIES[guild.id][c] = discord.utils.find(lambda m: m.name.lower().replace("_","") == name_.lower(), guild.emojis)
+            if ZU_EMOGIES[guild.id][c] == None:
+                ZU_EMOGIES[guild.id][c] = ":question:"
         ZU_EMOGIES[guild.id][" "] = discord.utils.get(guild.emojis, name="zu")
 
         print("Syncing tree for",guild.name)
