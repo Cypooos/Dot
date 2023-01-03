@@ -24,7 +24,7 @@ async def color(interaction,color:str):
             if color in x.name: continue
             await interaction.user.remove_roles(x)
         await interaction.response.send_message("You are brand new!", ephemeral=True)
-    if COLOR_ROLES[interaction.guild_id] == {}:
+    elif COLOR_ROLES[interaction.guild_id] == {}:
         await interaction.response.send_message("This server doesn't have color roles, sorry !", ephemeral=True)
     else:
         r = COLOR_ROLES[interaction.guild_id].get(color,None)
