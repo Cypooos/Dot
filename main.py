@@ -20,10 +20,10 @@ COLOR_ROLES = { }
 async def color(interaction,color:str):
     color = color.lower().strip()
     if color == "remove":
+        await interaction.response.send_message("I'm removing your roles!", ephemeral=True)
         for x in COLOR_ROLES[interaction.guild_id].values() :
             if color in x.name: continue
             await interaction.user.remove_roles(x)
-        await interaction.response.send_message("You are brand new!", ephemeral=True)
     elif COLOR_ROLES[interaction.guild_id] == {}:
         await interaction.response.send_message("This server doesn't have color roles, sorry !", ephemeral=True)
     else:
@@ -32,10 +32,10 @@ async def color(interaction,color:str):
             await interaction.response.send_message("I did not find color `"+color+"`, use `/colors` to see a list of colors", ephemeral=True)
         else:
             await interaction.user.add_roles(r)
+            await interaction.response.send_message("Done!", ephemeral=True)
             for x in COLOR_ROLES[interaction.guild_id].values() :
                 if color in x.name: continue
                 await interaction.user.remove_roles(x)
-            await interaction.response.send_message("Done!", ephemeral=True)
 
 
 @tree.command(name = "reload", description = "**ADMINISTRATOR ONLY**: will reload this server informations.", guilds=GUILDS_PRIORITARY) 
