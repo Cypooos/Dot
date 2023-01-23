@@ -1,7 +1,7 @@
 # Hypercube
-A simple discord bot that run on a ubuntu server customly hosted
+A simple discord bot that run on a ubuntu server customly hosted, inspired by the game `FEZ`.
 
-You may take a look at the code as every confidential informations is in a `.env`
+You may take a look at the code as every confidential informations is in a `.env`.
 
 ## Current setup
 
