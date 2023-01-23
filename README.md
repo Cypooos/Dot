@@ -12,4 +12,4 @@ Add thoses to the [cron](https://doc.ubuntu-fr.org/cron) entries :
 
 Thoses will restart the bot on restart, and shutdown + reload the bot's code every day at midnight.
 
-Everything is done in another `tmux` session, CF. [`start.sh`](https://github.com/Cypooos/Dot/blob/main/start.sh
+Everything is done in another `tmux` session, CF. [`start.sh`](https://github.com/Cypooos/Dot/blob/main/start.sh)
